@@ -25,20 +25,24 @@ class DruxtClient {
       throw new Error('The \'baseUrl\' parameter is required.')
     }
 
-    // Setup Axios.
-    let axiosSettings = { baseURL: baseUrl }
-    if (typeof options.axios === 'object') {
-      axiosSettings = Object.assign(axiosSettings, options.axios)
-      delete options.axios
-    }
-
     /**
-     * The Axios instance.
+     * Axios instance.
      *
      * @see {@link https://github.com/axios/axios#instance-methods}
      * @type {object}
      */
-    this.axios = axios.create(axiosSettings)
+    this.axios = {}
+    if (options.axios) {
+      this.axios = options.axios
+    }
+
+    // Setup Axios.
+    else {
+      this.axios = axios.create({
+        ...options.axiosSettings || {},
+        baseURL: baseUrl,
+      })
+    }
 
     /**
      * Druxt base options.

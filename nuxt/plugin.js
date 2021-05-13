@@ -23,8 +23,11 @@ export default (context, inject) => {
 
   <% if (typeof options.axios === 'object') { %>
   // Axios settings.
-  options.axios = <%= JSON.stringify(options.axios) %>
+  options.axiosSettings = <%= JSON.stringify(options.axios) %>
   <% } %>
+
+  // Use the @nuxtjs/axios module Axios instance.
+  options.axios = context.app.$axios
 
   const druxt = new DruxtClient(baseUrl, options)
   inject('druxt', druxt)
