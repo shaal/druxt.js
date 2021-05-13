@@ -32,14 +32,16 @@ class DruxtClient {
      * @type {object}
      */
     this.axios = {}
-    if (options.axios) {
+
+    // Use Axios instance if provided.
+    if (typeof options.axios === 'function') {
       this.axios = options.axios
     }
 
-    // Setup Axios.
+    // Else, setup new instance of Axios.
     else {
       this.axios = axios.create({
-        ...options.axiosSettings || {},
+        ...options.axios || {},
         baseURL: baseUrl,
       })
     }
