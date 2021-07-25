@@ -2,3 +2,4 @@
 [submodule "drupal"]
     path = examples/drupal
     url = https://github.com/druxt/demo-api.druxtjs.org.git
+    ignore = dirty
