@@ -7,10 +7,32 @@ fi
 
 set -eu -o pipefail
 
-DDEV_DIR="${GITPOD_REPO_ROOT}/.ddev"
+DDEV_DIR="${GITPOD_REPO_ROOT}/examples/drupal/.ddev"
+mkdir -p "$DDEV_DIR"
+
+cat <<CONFIGEND > "${DDEV_DIR}"/config.yaml
+#gitpod-generated
+name: druxtjs
+type: drupal9
+docroot: web
+php_version: "7.4"
+webserver_type: nginx-fpm
+router_http_port: "80"
+router_https_port: "443"
+xdebug_enabled: false
+additional_hostnames: []
+additional_fqdns: []
+mariadb_version: "10.3"
+mysql_version: ""
+use_dns_when_possible: true
+composer_version: ""
+web_environment: []
+CONFIGEND
+
 # Generate a config.gitpod.yaml that adds the gitpod
 # proxied ports so they're known to ddev.
 shortgpurl="${GITPOD_WORKSPACE_URL#'https://'}"
+
 
 cat <<CONFIGEND > "${DDEV_DIR}"/config.gitpod.yaml
 #ddev-gitpod-generated

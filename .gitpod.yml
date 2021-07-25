@@ -10,11 +10,10 @@ tasks:
       yarn build
       # drupal installation
       .gitpod/download-ddev-images.sh
-      .gitpod/setup-ddev.sh
       .gitpod/setup-drupal.sh
     command: |
       .gitpod/setup-ddev.sh
-      ddev start
+      cd examples/drupal && ddev start
 
 # VScode xdebug extension
 vscode:
