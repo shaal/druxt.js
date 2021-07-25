@@ -33,7 +33,6 @@ CONFIGEND
 # proxied ports so they're known to ddev.
 shortgpurl="${GITPOD_WORKSPACE_URL#'https://'}"
 
-
 cat <<CONFIGEND > "${DDEV_DIR}"/config.gitpod.yaml
 #ddev-gitpod-generated
 use_dns_when_possible: false
@@ -68,3 +67,9 @@ COMPOSEEND
 
 # Misc housekeeping before start
 ddev config global --instrumentation-opt-in=true --router-bind-all-interfaces=true
+
+cd "$DDEV_DIR" && ddev start
+
+# Ignore dynamically generated ddev files
+echo 'config.yaml' >> "$DDEV_DIR"/.gitignore
+echo 'docker-compose.host-docker-internal.yaml' >> "$DDEV_DIR"/.gitignore
