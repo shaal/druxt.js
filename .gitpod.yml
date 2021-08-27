@@ -18,9 +18,11 @@ tasks:
       # drupal installation
       .gitpod/download-ddev-images.sh
       .gitpod/setup-drupal.sh
+      gp preview $(gp url 8080) --external
     command: |
       .gitpod/setup-ddev.sh
       cd $GITPOD_REPO_ROOT/examples/drupal/drupal-9 && ddev start
+      gp preview $(gp url 8080) --external
       gp sync-done ddev
 
   - name: druxt-site
